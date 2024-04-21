@@ -1,6 +1,4 @@
-import { defineConfig } from "vite";
-
-
-export default defineConfig({
-    
-  });
+export default {
+  // eslint-disable-next-line no-undef
+  base: process.env.REPO_NAME || "/repo-name/",
+};
