@@ -116,6 +116,23 @@ function onWindowResize() {
 }
 
 let userRotate = true;
+const russList: THREE.Mesh[] = [];
+function addRuss(){
+  const mesh = russ.clone();
+  const offset = 2 + russList.length * 2
+  mesh.position.set(Math.random() < 0.5 ? offset : 0, Math.random() < 0.5 ? offset: 0, Math.random() < 0.5 ? offset: 0);
+  scene.add(mesh);
+  russList.push(mesh);
+}
+
+const addBtn = document.createElement('button');
+addBtn.innerHTML = "MORE RUSS";
+const app = document.getElementById('app') as HTMLElement;
+app.appendChild(addBtn);
+
+addBtn.onclick = function () {
+  addRuss();
+}
 function animate() {
   requestAnimationFrame(animate)
 
@@ -143,6 +160,14 @@ function animate() {
     tetrahedron.rotation.x += 0.05;
     tetrahedron.position.x = 2 * Math.cos(Date.now() * 0.001);
     tetrahedron.position.z = 4 * Math.sin(Date.now() * 0.001); 
+  }
+
+  if(russList.length){
+    russList.forEach((russ, index) => {
+      russ.rotation.z += Math.cos(Date.now() * 0.001 + index);
+      russ.position.x = 2 * Math.cos(Date.now() * 0.001 + index);
+      russ.position.y = 2 * Math.sin(Date.now() * 0.001 + index);
+    });
   }
 
 
